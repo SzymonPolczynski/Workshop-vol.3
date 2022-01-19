@@ -6,5 +6,20 @@
 </head>
 <body>
     <header><p>Book your conference room now!</p></header>
+    <ul>
+        {% for room in rooms %}
+        <li>
+            <a href="{% url 'details' room.id %}">{{ room.name }}</a><br>
+            Capacity: {{ room.capacity }}<br>
+            Is reserved: {{ room.is_reserved }}<br>
+            Projector: {{ room.projector }}<br>
+            <input type="submit" name="operationType" value="modify">
+            <input type="submit" name="operationType" value="delete">
+            <input type="submit" name="operationType" value="reserve">
+        </li>
+        {% empty %}
+            No rooms available
+        {% endfor %}
+    </ul>
 </body>
 </html>

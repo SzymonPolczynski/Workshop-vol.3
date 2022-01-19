@@ -19,5 +19,10 @@ from booking import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('room/new/', views.AddRoom.as_view())
+    path('', views.AllRooms.as_view(), name="main"),
+    path('room/new/', views.AddRoom.as_view()),
+    path('room/<int:room_id>/', views.AllRooms.as_view, name="details"),
+    # path('room/modify/{id}/',),
+    # path('room/delete/{id}/',),
+    # path('room/reserve/{id}/',),
 ]

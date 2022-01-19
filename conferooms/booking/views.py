@@ -24,3 +24,12 @@ class AddRoom(View):
             return render(request, "add_room.html", context={"error": error})
         room = Room.objects.create(name=name, capacity=capacity, projector=projector)
         return redirect("/")
+
+
+class AllRooms(View):
+    def get(self, request):
+        rooms = Room.objects.all().order_by("-name")
+        return render(request, "main.html", context={"rooms": rooms})
+
+
+def delete_room(request, room_id):
