@@ -15,4 +15,5 @@ Project was created with:
 * Psycopg2 2.9.3
 * PostgreSQL
 ### General info
-Created by Szymon Połczyński
+Created by Szymon Połczyński  
+App link http://rengrim.pythonanywhere.com/
