@@ -1,4 +1,22 @@
-<h1>Reservation for room {{ name }}</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+}
+</style>
+<div class="header">
+    <h2>Reservation for room {{ name }}</h2>
+</div>
 <span style='color: red'>{{ error }}</span>
 <form action="" method="POST">
 {% csrf_token %}
