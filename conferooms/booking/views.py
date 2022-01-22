@@ -6,22 +6,33 @@ from booking.models import Room, Reservation
 
 class AddRoom(View):
     def get(self, request):
-        return render(request, "main.html", context={"middle": "add_room.html"})
+        ctx = {
+            "middle": "add_room.html"
+        }
+        return render(request, "main.html", context=ctx)
 
     def post(self, request):
         name = request.POST.get("name")
         capacity = request.POST.get("capacity")
         projector = bool(request.POST.get("projector"))
-        error = ""
         if name == "":
-            error = "Please enter room name"
-            return render(request, "main.html", context={"middle": "add_room.html", "error": error})
+            ctx = {
+                "middle": "add_room.html",
+                "error": "Please enter room name"
+            }
+            return render(request, "main.html", context=ctx)
         if Room.objects.filter(name=name).exists():
-            error = "Name already taken"
-            return render(request, "main.html", context={"middle": "add_room.html", "error": error})
+            ctx = {
+                "middle": "add_room.html",
+                "error": "Name already taken"
+            }
+            return render(request, "main.html", context=ctx)
         if capacity == "" or int(capacity) <= 0:
-            error = "Invalid capacity"
-            return render(request, "main.html", context={"middle": "add_room.html", "error": error})
+            ctx = {
+                "middle": "add_room.html",
+                "error": "Invalid capacity"
+            }
+            return render(request, "main.html", context=ctx)
         Room.objects.create(name=name, capacity=capacity, projector=projector)
         return redirect("/")
 
@@ -33,7 +44,11 @@ class AllRooms(View):
         for room in rooms:
             is_reserved = room.reservation_set.filter(date=today).exists()
             room.is_reserved = is_reserved
-        return render(request, "main.html", context={"rooms": rooms, "middle": "all_rooms.html"})
+        ctx = {
+            "rooms": rooms,
+            "middle": "all_rooms.html"
+        }
+        return render(request, "main.html", context=ctx)
 
 
 class DeleteRoom(View):
@@ -46,24 +61,39 @@ class DeleteRoom(View):
 class ModifyRoom(View):
     def get(self, request, room_id):
         room = Room.objects.get(pk=room_id)
-        return render(request, "main.html", context={"room": room, "middle": "modify_room.html"})
+        ctx = {
+            "room": room,
+            "middle": "modify_room.html"
+        }
+        return render(request, "main.html", context=ctx)
 
     def post(self, request, room_id):
         room = Room.objects.get(pk=room_id)
         name = request.POST.get("name")
         capacity = request.POST.get("capacity")
         projector = bool(request.POST.get("projector"))
-        error = ""
         if name == "":
-            error = "Please enter room name"
-            return render(request, "main.html", context={"room": room, "middle": "modify_room.html", "error": error})
+            ctx = {
+                "room": room,
+                "middle": "modify_room.html",
+                "error": "Please enter room name"
+            }
+            return render(request, "main.html", context=ctx)
         if name != room.name:
             if Room.objects.filter(name=name).exists():
-                error = "Name already taken"
-                return render(request, "main.html", context={"room": room, "middle": "modify_room.html", "error": error})
+                ctx = {
+                    "room": room,
+                    "middle": "modify_room.html",
+                    "error": "Name already taken"
+                }
+                return render(request, "main.html", context=ctx)
         if capacity == "" or int(capacity) <= 0:
-            error = "Invalid capacity"
-            return render(request, "main.html", context={"room": room, "middle": "modify_room.html", "error": error})
+            ctx = {
+                "room": room,
+                "middle": "modify_room.html",
+                "error": "Invalid capacity"
+            }
+            return render(request, "main.html", context=ctx)
         room.name = name
         room.capacity = capacity
         room.projector = projector
@@ -76,7 +106,12 @@ class ReserveRoom(View):
         room = Room.objects.get(pk=room_id)
         name = room.name
         reservations = room.reservation_set.filter(date__gte=datetime.date.today()).order_by("date")
-        return render(request, "main.html", context={"name": name, "middle": "reserve_room.html", "reservations": reservations})
+        ctx = {
+            "name": name,
+            "middle": "reserve_room.html",
+            "reservations": reservations
+        }
+        return render(request, "main.html", context=ctx)
 
     def post(self, request, room_id):
         room = Room.objects.get(pk=room_id)
@@ -138,4 +173,8 @@ class SearchEngine(View):
         for room in rooms:
             is_reserved = room.reservation_set.filter(date=today).exists()
             room.is_reserved = is_reserved
-        return render(request, "main.html", context={"rooms": rooms, "middle": "all_rooms.html"})
+        ctx = {
+            "rooms": rooms,
+            "middle": "all_rooms.html"
+        }
+        return render(request, "main.html", context=ctx)
