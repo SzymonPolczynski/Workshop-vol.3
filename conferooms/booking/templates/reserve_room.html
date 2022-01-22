@@ -1,0 +1,30 @@
+<h1>Reservation for room {{ name }}</h1>
+<span style='color: red'>{{ error }}</span>
+<form action="" method="POST">
+{% csrf_token %}
+<input type="date" name="date">
+<div class="form-floating" style="width: 500px">
+    {% if comment %}
+    <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px">{{ comment }}</textarea>
+    {% else %}
+    <textarea class="form-control" name="comment" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+    {% endif %}
+  <label for="floatingTextarea2">Comments</label>
+</div>
+<button type="submit">Reserve</button>
+</form>
+<br>
+{% if reservations %}
+This room is already reserved on following days:<br><br>
+<ul>
+{% for reservation in reservations %}
+    <li>
+        Reservations: {{ reservation.date }}<br>
+        {% if reservation.comment %}
+        Comment: {{ reservation.comment }}<br>
+        {% endif %}
+    </li>
+    <br>
+{% endfor %}
+</ul>
+{% endif %}

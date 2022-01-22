@@ -21,8 +21,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.AllRooms.as_view(), name="main"),
     path('room/new/', views.AddRoom.as_view()),
-    path('room/<int:room_id>/', views.AllRooms.as_view(), name="details"),
-    # path('room/modify/<int:room_id>/',),
+    path('room/<int:room_id>/', views.RoomDetails.as_view(), name="details"),
+    path('room/modify/<int:room_id>/', views.ModifyRoom.as_view(), name="modify"),
     path('room/delete/<int:room_id>/', views.DeleteRoom.as_view(), name="delete"),
-    # path('room/reserve/<int:room_id>/',),
+    path('room/reserve/<int:room_id>/', views.ReserveRoom.as_view(), name="reserve"),
+    path('search/', views.SearchEngine.as_view(), name="search")
 ]

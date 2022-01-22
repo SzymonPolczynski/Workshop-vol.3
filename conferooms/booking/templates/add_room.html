@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add new room</title>
-</head>
-<body>
-    <span style='color: red'>{{ error }}</span>
-    <form action="" method="POST">
-    {% csrf_token %}
-    <input type="text" name="name" placeholder="name" />
-    <input type="number" name="capacity" placeholder="capacity" />
-    <label for="projector">
-    Projector:
-    </label>
-    <input type="checkbox" name="projector" id="projector" />
-    <button type="submit">Add room</button>
+<span style='color: red'>{{ error }}</span>
+<form action="" method="POST">
+{% csrf_token %}
+<input type="text" name="name" placeholder="name" />
+<input type="number" name="capacity" placeholder="capacity" />
+<label for="projector">
+Projector:
+</label>
+<input type="checkbox" name="projector" id="projector" />
+<button type="submit">Add room</button>
 </form>
-</body>
-</html>

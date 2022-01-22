@@ -1,0 +1,23 @@
+<p>
+    Room : {{ room.name }}<br>
+    Capacity: {{ room.capacity }}<br>
+    {% if room.projector == True %}
+    Projector: Yes<br>
+    {% else %}
+    Projector: No<br>
+    {% endif %}
+    <a class="btn btn-secondary" href="/room/delete/{{ room.id }}/">Delete</a>
+    <a class="btn btn-secondary" href="/room/modify/{{ room.id }}/">Modify</a>
+    <a class="btn btn-secondary" href="/room/reserve/{{ room.id }}/">Reserve</a>
+    <ul>
+    {% for reservation in reservations %}
+        <li>
+            Reservations: {{ reservation.date }}<br>
+            {% if reservation.comment %}
+            Comment: {{ reservation.comment }}<br>
+            {% endif %}
+        </li>
+        <br>
+    {% endfor %}
+    </ul>
+</p>

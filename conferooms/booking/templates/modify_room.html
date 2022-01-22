@@ -1,0 +1,11 @@
+<span style='color: red'>{{ error }}</span>
+<form action="" method="POST">
+{% csrf_token %}
+<input type="text" name="name" value="{{ room.name }}" placeholder="room name" />
+<input type="number" name="capacity" value="{{ room.capacity }}" placeholder="capacity" />
+<label for="projector">
+Projector:
+</label>
+<input type="checkbox" name="projector" value="{{ room.projector }}" id="projector" />
+<button type="submit">Modify room</button>
+</form>
