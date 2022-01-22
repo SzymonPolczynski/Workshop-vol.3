@@ -1,15 +1,42 @@
-<p>
-    Room : {{ room.name }}<br>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+.header {
+  background-color: #f1f1f1;
+  padding: 30px;
+  text-align: center;
+  font-size: 35px;
+}
+.column {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  padding: 10px;
+}
+</style>
+<div class="header">
+    <h2>Details of {{ room.name }}</h2>
+</div>
+<div class="column" style="background-color:#ccc;">
+    Room name: {{ room.name }}<br>
     Capacity: {{ room.capacity }}<br>
     {% if room.projector == True %}
     Projector: Yes<br>
     {% else %}
     Projector: No<br>
     {% endif %}
+    <br>
     <a class="btn btn-secondary" href="/room/delete/{{ room.id }}/">Delete</a>
     <a class="btn btn-secondary" href="/room/modify/{{ room.id }}/">Modify</a>
     <a class="btn btn-secondary" href="/room/reserve/{{ room.id }}/">Reserve</a>
     <ul>
+    <br>
     {% for reservation in reservations %}
         <li>
             Reservations: {{ reservation.date }}<br>
@@ -20,4 +47,4 @@
         <br>
     {% endfor %}
     </ul>
-</p>
+</div>
